@@ -9,7 +9,11 @@ export const TaskSlice = createSlice({
         status: "idle",
         error: null
     },
-    reducers:{},
+    reducers:{
+        removeTask: (state,action) => {
+            state.data = state.data.filter((el) => el.content != action.payload)
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(getRandomTasks.fulfilled,(state,action) => {
             state.data = action.payload;
@@ -26,3 +30,4 @@ export const TaskSlice = createSlice({
 export const getTaskData = (state) => state.task.data
 export const getTaskStatus = (state) => state.task.status
 export const getTaskError = (state) => state.task.error
+export const {removeTask} = TaskSlice.actions

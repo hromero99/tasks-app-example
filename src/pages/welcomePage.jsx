@@ -1,8 +1,9 @@
 import { useDispatch, useSelector } from "react-redux"
-import { getTaskData, getTaskError, getTaskStatus } from "../features/tasks/taskSlice"
+import { getTaskData, getTaskError, getTaskStatus, removeTask } from "../features/tasks/taskSlice"
 import { useEffect, useState } from "react"
 import { CardStyled } from "../components/cardStyled"
 import { getRandomTasks } from "../features/tasks/taskThunk"
+import { CardContainerStyled } from "../components/cardContainerStyled"
 
 
 export const WelcomePage = () => {
@@ -26,16 +27,18 @@ export const WelcomePage = () => {
             setSpinner(false)
         }
     },[dispatch,tasksData,tasksStatus])
-    console.log(tasks)
+    
+
     return (
-        <>
+        <CardContainerStyled>
         {spinner ? <h3>Loading</h3> : <>
             {tasks.map((task,map) => 
                 <CardStyled>
                     <p>{task.content}</p>
+                    <button onClick={() => dispatch(removeTask(task.content))}>Remove task</button>
                 </CardStyled>
             )}
        </>}
-       </>
+       </CardContainerStyled>
        )
 }
