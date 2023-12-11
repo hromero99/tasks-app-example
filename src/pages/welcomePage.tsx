@@ -4,18 +4,21 @@ import { useEffect, useState } from "react"
 import { CardStyled } from "../components/cardStyled"
 import { getRandomTasks } from "../features/tasks/taskThunk"
 import { CardContainerStyled } from "../components/cardContainerStyled"
+import { statusOptions } from "../interfaces/taskSliceInterface"
+import { TaskInterface } from "../interfaces/taskInterface"
 
 
-export const WelcomePage = () => {
+export const WelcomePage = (): any  => {
 
-    const [spinner,setSpinner] = useState(true)
-    const [tasks,setTasks] = useState([])
+    const [spinner,setSpinner] = useState<boolean>(true)
+    const [tasks,setTasks] = useState<TaskInterface[]>([])
     const dispatch = useDispatch()
-    const tasksData = useSelector(getTaskData)
-    const tasksStatus = useSelector(getTaskStatus)
-    const tasksError = useSelector(getTaskError)
+    const tasksData = useSelector<TaskInterface[]>(getTaskData)
+    const tasksStatus = useSelector<string>(getTaskStatus)
+    const tasksError = useSelector<string|undefined>(getTaskError)
 
     useEffect(()=> {
+        console.log(tasksStatus)
         if (tasksStatus == "idle"){
             dispatch(getRandomTasks())
         }
