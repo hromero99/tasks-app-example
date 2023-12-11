@@ -4,6 +4,6 @@ export const statusOptions = <const>["fulfilled","rejected","idle","pending"];
 
 export interface TaskSliceInitialStateInterface {
     data: TaskInterface[],
-    status: string,
+    status: 'idle' | 'pending' | 'fulfilled' | 'rejected',
     error: string | undefined 
 }

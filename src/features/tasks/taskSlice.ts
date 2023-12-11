@@ -29,7 +29,7 @@ export const TaskSlice = createSlice({
         }).addCase(getRandomTasks.pending,(state,action):void => {
             state.status = "pending"
         }).addCase(getRandomTasks.rejected,(state,action): void => {
-            state.status= "error"
+            state.status= "rejected"
             state.error = action.error.message
         })
     }
