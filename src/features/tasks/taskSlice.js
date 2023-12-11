@@ -12,6 +12,9 @@ export const TaskSlice = createSlice({
     reducers:{
         removeTask: (state,action) => {
             state.data = state.data.filter((el) => el.content != action.payload)
+        },
+        addTask: (state,action) => {
+            state.data.push(action.payload)
         }
     },
     extraReducers: (builder) => {
